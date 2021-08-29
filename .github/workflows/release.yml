@@ -23,16 +23,16 @@ jobs:
         run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
 
       - name: Build the tagged Docker image
-        run: docker build . --file Dockerfile --tag tjacobs/openmiko:${{steps.vars.outputs.tag}}
+        run: docker build . --file Dockerfile --tag ${{steps.vars.outputs.tag}}
 
       - name: Push the tagged Docker image
         run: docker push openmiko/openmiko:${{steps.vars.outputs.tag}}
 
       - name: Tag image as latest
-        run: docker tag openmiko/openmiko:${{steps.vars.outputs.tag}} openmiko/openmiko:latest
+        run: docker tag ${{steps.vars.outputs.tag}} latest
 
       - name: Push the latest Docker image
-        run: docker push openmiko/openmiko:latest
+        run: docker push latest
   release:
     name: Create a release
     runs-on: ubuntu-latest
