@@ -43,13 +43,13 @@ jobs:
         run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
 
       - name: Copy openmiko_firmware.bin out of container
-        run: docker run --rm --entrypoint cat ${{steps.vars.outputs.tag}}:latest /src/release/openmiko_firmware.bin > /tmp/openmiko_firmware.bin
+        run: docker run --rm --entrypoint cat ${{steps.vars.outputs.tag}} /src/release/openmiko_firmware.bin > /tmp/openmiko_firmware.bin
 
       - name: Copy rootfs.jffs2 out of container
-        run: docker run --rm --entrypoint cat ${{steps.vars.outputs.tag}}:latest /src/release/rootfs.jffs2 > /tmp/rootfs.jffs2
+        run: docker run --rm --entrypoint cat ${{steps.vars.outputs.tag}} /src/release/rootfs.jffs2 > /tmp/rootfs.jffs2
 
       - name: Copy uImage.lzma (kernel) out of container
-        run: docker run --rm --entrypoint cat ${{steps.vars.outputs.tag}}:latest /src/release/uImage.lzma > /tmp/uImage.lzma
+        run: docker run --rm --entrypoint cat ${{steps.vars.outputs.tag}} /src/release/uImage.lzma > /tmp/uImage.lzma
 
       - name: Create Release
         id: create_release
