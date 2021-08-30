@@ -25,14 +25,14 @@ jobs:
       - name: Build the tagged Docker image
         run: docker build . --file Dockerfile --tag master #${{steps.vars.outputs.tag}}
 
-      - name: Push the tagged Docker image
-        run: docker push tomjacobs/openmiko:master #openmiko/openmiko:${{steps.vars.outputs.tag}}
+#      - name: Push the tagged Docker image
+#        run: docker push tomjacobs/openmiko:master #openmiko/openmiko:${{steps.vars.outputs.tag}}
 
-      - name: Tag image as latest
-        run: docker tag master latest #${{steps.vars.outputs.tag}} latest
+#      - name: Tag image as latest
+#        run: docker tag master latest #${{steps.vars.outputs.tag}} latest
 
-      - name: Push the latest Docker image
-        run: docker push tomjacobs/latest
+#      - name: Push the latest Docker image
+#        run: docker push tomjacobs/latest
   release:
     name: Create a release
     runs-on: ubuntu-latest
