@@ -26,7 +26,7 @@ jobs:
         run: docker build . --file Dockerfile --tag ${{steps.vars.outputs.tag}}
 
       - name: Push the tagged Docker image
-        run: docker push tomjacobs/openmiko:${{steps.vars.outputs.tag}}
+        run: docker push ${{steps.vars.outputs.tag}}:latest
 
 #      - name: Tag image as latest
 #        run: docker tag master latest #${{steps.vars.outputs.tag}} latest
