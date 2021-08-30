@@ -1,8 +1,8 @@
 on:
   push:
     # Sequence of patterns matched against refs/tags
-    #tags:
-    #  - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 name: Create Release
 
@@ -23,10 +23,10 @@ jobs:
         run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
 
       - name: Build the tagged Docker image
-        run: docker build . --file Dockerfile --tag master #${{steps.vars.outputs.tag}}
+        run: docker build . --file Dockerfile --tag ${{steps.vars.outputs.tag}}
 
-#      - name: Push the tagged Docker image
-#        run: docker push tomjacobs/openmiko:master #openmiko/openmiko:${{steps.vars.outputs.tag}}
+      - name: Push the tagged Docker image
+        run: docker push tjacobs/openmiko:${{steps.vars.outputs.tag}}
 
 #      - name: Tag image as latest
 #        run: docker tag master latest #${{steps.vars.outputs.tag}} latest
