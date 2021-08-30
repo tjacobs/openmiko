@@ -33,14 +33,6 @@ jobs:
 
 #      - name: Push the latest Docker image
 #        run: docker push tomjacobs/latest
-  release:
-    name: Create a release
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Get the version
-        id: vars
-        run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
 
       - name: Copy openmiko_firmware.bin out of container
         run: docker run --rm --entrypoint cat ${{steps.vars.outputs.tag}} /src/release/openmiko_firmware.bin > /tmp/openmiko_firmware.bin
