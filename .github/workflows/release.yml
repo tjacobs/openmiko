@@ -26,7 +26,7 @@ jobs:
         run: echo ::set-output name=tag::tag1
 
       - name: Build the tagged Docker image
-        run: docker build . --file Dockerfile --tag ${{steps.vars.outputs.tag}}
+        run: docker build . --file Dockerfile --tag tomjacobs/openmiko:tag1
 
       - name: Push the tagged Docker image
         #run: docker push ${{steps.vars.outputs.tag}}:latest
