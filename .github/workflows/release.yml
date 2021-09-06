@@ -29,15 +29,21 @@ jobs:
         run: docker build . --file Dockerfile --tag tomjacobs/openmiko:tag1
 
       - name: Push the tagged Docker image
-        #run: docker push ${{steps.vars.outputs.tag}}:latest
         run: docker push tomjacobs/openmiko:tag1
         
 #      - name: Tag image as latest
 #        run: docker tag master latest #${{steps.vars.outputs.tag}} latest
-
 #      - name: Push the latest Docker image
 #        run: docker push tomjacobs/latest
 
+  release:
+    name: Create a release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the version
+        id: vars
+        run: echo ::set-output name=tag::tomjacobs/openmiko:tag1
+        
       - name: Copy openmiko_firmware.bin out of container
         run: docker run --rm --entrypoint cat ${{steps.vars.outputs.tag}} /src/release/openmiko_firmware.bin > /tmp/openmiko_firmware.bin
 
