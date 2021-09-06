@@ -25,8 +25,8 @@ jobs:
       - name: Build the tagged Docker image
         run: docker build . --file Dockerfile --tag ${{steps.vars.outputs.tag}}
 
-#      - name: Push the tagged Docker image
-#        run: docker push ${{steps.vars.outputs.tag}}:latest
+      - name: Push the tagged Docker image
+        run: docker push ${{steps.vars.outputs.tag}}:latest
 
 #      - name: Tag image as latest
 #        run: docker tag master latest #${{steps.vars.outputs.tag}} latest
