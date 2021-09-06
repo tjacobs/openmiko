@@ -18,7 +18,7 @@ jobs:
 
       - name: Login to DockerHub Registry
         run: echo Add secrets DOCKERHUB_USERNAME DOCKERHUB_PASSWORD at https://github.com/tjacobs/openmiko/settings/secrets/actions &&
-             echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+             echo ${{ secrets.DOCKERHUB_USERNAME }} && echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
       - name: Get the version
         id: vars
@@ -29,8 +29,9 @@ jobs:
         run: docker build . --file Dockerfile --tag ${{steps.vars.outputs.tag}}
 
       - name: Push the tagged Docker image
-        run: docker push ${{steps.vars.outputs.tag}}:latest
-
+        #run: docker push ${{steps.vars.outputs.tag}}:latest
+        run: docker push tomjacobs/openmiko:tag1
+        
 #      - name: Tag image as latest
 #        run: docker tag master latest #${{steps.vars.outputs.tag}} latest
 
